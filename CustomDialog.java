@@ -13,12 +13,12 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-/* При натискане на бутон да се даде възможност на потребителя да избере по коя колона да сортира
-*	Създаване на диалог
-*	Добавяне на текст за избор
-*	Добавяне на текстово поле, където потребителя да въведе своя избор
-*	Добавяне на бутон, който спрямо избора ще сортира съответната колона
-*	Добавяне на Custom Comparators
+/* РџСЂРё РЅР°С‚РёСЃРєР°РЅРµ РЅР° Р±СѓС‚РѕРЅ РґР° СЃРµ РґР°РґРµ РІСЉР·РјРѕР¶РЅРѕСЃС‚ РЅР° РїРѕС‚СЂРµР±РёС‚РµР»СЏ РґР° РёР·Р±РµСЂРµ РїРѕ РєРѕСЏ РєРѕР»РѕРЅР° РґР° СЃРѕСЂС‚РёСЂР°
+*	РЎСЉР·РґР°РІР°РЅРµ РЅР° РґРёР°Р»РѕРі
+*	Р”РѕР±Р°РІСЏРЅРµ РЅР° С‚РµРєСЃС‚ Р·Р° РёР·Р±РѕСЂ
+*	Р”РѕР±Р°РІСЏРЅРµ РЅР° С‚РµРєСЃС‚РѕРІРѕ РїРѕР»Рµ, РєСЉРґРµС‚Рѕ РїРѕС‚СЂРµР±РёС‚РµР»СЏ РґР° РІСЉРІРµРґРµ СЃРІРѕСЏ РёР·Р±РѕСЂ
+*	Р”РѕР±Р°РІСЏРЅРµ РЅР° Р±СѓС‚РѕРЅ, РєРѕР№С‚Рѕ СЃРїСЂСЏРјРѕ РёР·Р±РѕСЂР° С‰Рµ СЃРѕСЂС‚РёСЂР° СЃСЉРѕС‚РІРµС‚РЅР°С‚Р° РєРѕР»РѕРЅР°
+*	Р”РѕР±Р°РІСЏРЅРµ РЅР° Custom Comparators
 */
 public class CustomDialog extends JDialog implements ActionListener, PropertyChangeListener {
 
@@ -33,48 +33,48 @@ public class CustomDialog extends JDialog implements ActionListener, PropertyCha
 
 	private PersonDataGUI parentGui;
 
-	// Създаване на диалог
+	// РЎСЉР·РґР°РІР°РЅРµ РЅР° РґРёР°Р»РѕРі
 	public CustomDialog(String text, PersonDataGUI parent) {
-		setTitle("Избор на сортиране");
+		setTitle("РР·Р±РѕСЂ РЅР° СЃРѕСЂС‚РёСЂР°РЅРµ");
 
 		this.parentGui = parent;
 		this.textField = new JTextField(2);
 
-		// Създаване на масив с текст и с компоненти, които да се визуализират
+		// РЎСЉР·РґР°РІР°РЅРµ РЅР° РјР°СЃРёРІ СЃ С‚РµРєСЃС‚ Рё СЃ РєРѕРјРїРѕРЅРµРЅС‚Рё, РєРѕРёС‚Рѕ РґР° СЃРµ РІРёР·СѓР°Р»РёР·РёСЂР°С‚
 		Object[] array = {text, textField};
 		Object[] options = {okLabel, cancelLabel};
 
 		optionPane = new JOptionPane(array, JOptionPane.QUESTION_MESSAGE, 
 				JOptionPane.OK_CANCEL_OPTION, null, options, options[0]);
 
-		// Визуализиране на диалога
+		// Р’РёР·СѓР°Р»РёР·РёСЂР°РЅРµ РЅР° РґРёР°Р»РѕРіР°
 		setContentPane(optionPane);
 		
-		// Прихващане на затварянето на диалога
+		// РџСЂРёС…РІР°С‰Р°РЅРµ РЅР° Р·Р°С‚РІР°СЂСЏРЅРµС‚Рѕ РЅР° РґРёР°Р»РѕРіР°
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent we) {
-				// Вместо да затваряме директно прозореца, ще се промени стойността на JOptionPane
+				// Р’РјРµСЃС‚Рѕ РґР° Р·Р°С‚РІР°СЂСЏРјРµ РґРёСЂРµРєС‚РЅРѕ РїСЂРѕР·РѕСЂРµС†Р°, С‰Рµ СЃРµ РїСЂРѕРјРµРЅРё СЃС‚РѕР№РЅРѕСЃС‚С‚Р° РЅР° JOptionPane
 				optionPane.setValue(new Integer(JOptionPane.CLOSED_OPTION));
 			}
 		});
 
-		// Уверяваме се, че текстовото поле винаги получава първия фокус
+		// РЈРІРµСЂСЏРІР°РјРµ СЃРµ, С‡Рµ С‚РµРєСЃС‚РѕРІРѕС‚Рѕ РїРѕР»Рµ РІРёРЅР°РіРё РїРѕР»СѓС‡Р°РІР° РїСЉСЂРІРёСЏ С„РѕРєСѓСЃ
 		addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent ce) {
 				textField.requestFocusInWindow();
 			}
 		});
 
-		// регистриране на event handler за текстовото поле
+		// СЂРµРіРёСЃС‚СЂРёСЂР°РЅРµ РЅР° event handler Р·Р° С‚РµРєСЃС‚РѕРІРѕС‚Рѕ РїРѕР»Рµ
 		textField.addActionListener(this);
 		
-		// регистриране на event handler, който реагира при промяна на състоянието на ОptionPane
+		// СЂРµРіРёСЃС‚СЂРёСЂР°РЅРµ РЅР° event handler, РєРѕР№С‚Рѕ СЂРµР°РіРёСЂР° РїСЂРё РїСЂРѕРјСЏРЅР° РЅР° СЃСЉСЃС‚РѕСЏРЅРёРµС‚Рѕ РЅР° РћptionPane
 		optionPane.addPropertyChangeListener(this);
 	} // end CustomDialog constructor
 
-	//само цифри
+	//СЃР°РјРѕ С†РёС„СЂРё
 	@SuppressWarnings("unused")
 	private int Integer() {
 	    int i = 0;
@@ -91,7 +91,7 @@ public class CustomDialog extends JDialog implements ActionListener, PropertyCha
 	public void propertyChange(PropertyChangeEvent evt) {
 		String propertyName = evt.getPropertyName();
 
-		// проверка, дали има промяна в ОptionPane стойността
+		// РїСЂРѕРІРµСЂРєР°, РґР°Р»Рё РёРјР° РїСЂРѕРјСЏРЅР° РІ РћptionPane СЃС‚РѕР№РЅРѕСЃС‚С‚Р°
 		if (isVisible() && (evt.getSource() == optionPane)
 				&& (JOptionPane.VALUE_PROPERTY.equals(propertyName) || 
 						JOptionPane.INPUT_VALUE_PROPERTY.equals(propertyName))) {
@@ -103,9 +103,9 @@ public class CustomDialog extends JDialog implements ActionListener, PropertyCha
 			}
 
 			/*
-			 * Нулиране на стойността на JOptionPane. 
-			 * Ако не направите това, тогава, ако потребителят натиска същия бутон следващия път,
-			 * няма да се прихване събитие за промяна.
+			 * РќСѓР»РёСЂР°РЅРµ РЅР° СЃС‚РѕР№РЅРѕСЃС‚С‚Р° РЅР° JOptionPane. 
+			 * РђРєРѕ РЅРµ РЅР°РїСЂР°РІРёС‚Рµ С‚РѕРІР°, С‚РѕРіР°РІР°, Р°РєРѕ РїРѕС‚СЂРµР±РёС‚РµР»СЏС‚ РЅР°С‚РёСЃРєР° СЃСЉС‰РёСЏ Р±СѓС‚РѕРЅ СЃР»РµРґРІР°С‰РёСЏ РїСЉС‚,
+			 * РЅСЏРјР° РґР° СЃРµ РїСЂРёС…РІР°РЅРµ СЃСЉР±РёС‚РёРµ Р·Р° РїСЂРѕРјСЏРЅР°.
 			 */
 			optionPane.setValue(JOptionPane.UNINITIALIZED_VALUE);
 
@@ -118,21 +118,21 @@ public class CustomDialog extends JDialog implements ActionListener, PropertyCha
 						parentGui.sortTable(intValue, parentGui.table, PersonDataGUI.people);
 						clearAndHide();
 					} else {
-						// Текстът е невалиден
+						// РўРµРєСЃС‚СЉС‚ Рµ РЅРµРІР°Р»РёРґРµРЅ
 						textField.selectAll();
 
 						JOptionPane.showMessageDialog(CustomDialog.this,
-								"Съжалявам, стойността: " + typedText + " не е валидна!", 
-								"Грешка", JOptionPane.ERROR_MESSAGE);
+								"РЎСЉР¶Р°Р»СЏРІР°Рј, СЃС‚РѕР№РЅРѕСЃС‚С‚Р°: " + typedText + " РЅРµ Рµ РІР°Р»РёРґРЅР°!", 
+								"Р“СЂРµС€РєР°", JOptionPane.ERROR_MESSAGE);
 
 						typedText = null;
 						textField.requestFocusInWindow();
 					}
 				} else {
-					// Случай, в който потребителят не е въвел стойност
+					// РЎР»СѓС‡Р°Р№, РІ РєРѕР№С‚Рѕ РїРѕС‚СЂРµР±РёС‚РµР»СЏС‚ РЅРµ Рµ РІСЉРІРµР» СЃС‚РѕР№РЅРѕСЃС‚
 					JOptionPane.showMessageDialog(CustomDialog.this,
-							"Съжаляваме, трябва да добавите стойност!", 
-							"Грешка", JOptionPane.ERROR_MESSAGE);
+							"РЎСЉР¶Р°Р»СЏРІР°РјРµ, С‚СЂСЏР±РІР° РґР° РґРѕР±Р°РІРёС‚Рµ СЃС‚РѕР№РЅРѕСЃС‚!", 
+							"Р“СЂРµС€РєР°", JOptionPane.ERROR_MESSAGE);
 				}
 			} else {
 				typedText = null;
@@ -147,7 +147,7 @@ public class CustomDialog extends JDialog implements ActionListener, PropertyCha
 
 	}
 
-	// Този метод изчиства диалога и го скрива
+	// РўРѕР·Рё РјРµС‚РѕРґ РёР·С‡РёСЃС‚РІР° РґРёР°Р»РѕРіР° Рё РіРѕ СЃРєСЂРёРІР°
 	private void clearAndHide() {
 		textField.setText(null);
 		setVisible(false);
