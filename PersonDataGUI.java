@@ -24,7 +24,7 @@ import fmi.informatics.extending.Person;
 import fmi.informatics.extending.Professor;
 import fmi.informatics.extending.Student;
 
-// създаваме клас PersonDataGUI
+// СЃСЉР·РґР°РІР°РјРµ РєР»Р°СЃ PersonDataGUI
 public class PersonDataGUI {
 	
 	public static Person[] people;
@@ -52,21 +52,21 @@ public class PersonDataGUI {
 	}
 	
 	public void createAndShowGUI() {
-		JFrame frame = new JFrame("Таблица с данни за хора");
+		JFrame frame = new JFrame("РўР°Р±Р»РёС†Р° СЃ РґР°РЅРЅРё Р·Р° С…РѕСЂР°");
 		frame.setSize(500, 500);
 		
-		JLabel label = new JLabel("Списък с потребители", JLabel.CENTER);
+		JLabel label = new JLabel("РЎРїРёСЃСЉРє СЃ РїРѕС‚СЂРµР±РёС‚РµР»Рё", JLabel.CENTER);
 		
 		personDataModel = new PersonDataModel(people);
 		table = new JTable(personDataModel);
 		
 		JScrollPane scrollPane = new JScrollPane(table);
 		
-		// Добавяме бутон за сортиране по години с Comparable interface
-		JButton buttonSortAge = new JButton("Сортирай по години");
+		// Р”РѕР±Р°РІСЏРјРµ Р±СѓС‚РѕРЅ Р·Р° СЃРѕСЂС‚РёСЂР°РЅРµ РїРѕ РіРѕРґРёРЅРё СЃ Comparable interface
+		JButton buttonSortAge = new JButton("РЎРѕСЂС‚РёСЂР°Р№ РїРѕ РіРѕРґРёРЅРё");
 
-		// Добавяме бутон за сортиране
-		JButton buttonSort = new JButton("Сортирай");
+		// Р”РѕР±Р°РІСЏРјРµ Р±СѓС‚РѕРЅ Р·Р° СЃРѕСЂС‚РёСЂР°РЅРµ
+		JButton buttonSort = new JButton("РЎРѕСЂС‚РёСЂР°Р№");
 		
 		Container container = frame.getContentPane();
 		container.setLayout(new BorderLayout());
@@ -76,7 +76,7 @@ public class PersonDataGUI {
 		container.add(buttonSortAge, BorderLayout.BEFORE_FIRST_LINE);
 		container.add(buttonSort, BorderLayout.SOUTH);
 		
-		// Добавяме listener към бутона за сортиране по години
+		// Р”РѕР±Р°РІСЏРјРµ listener РєСЉРј Р±СѓС‚РѕРЅР° Р·Р° СЃРѕСЂС‚РёСЂР°РЅРµ РїРѕ РіРѕРґРёРЅРё
 		buttonSortAge.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -85,10 +85,10 @@ public class PersonDataGUI {
 			}
 		});
 		
-		// Добавяме диалог
+		// Р”РѕР±Р°РІСЏРјРµ РґРёР°Р»РѕРі
 		final JDialog sortDialog = new CustomDialog(getSortText(), this);
 		
-		// Добавяме listener към бутона за сортиране
+		// Р”РѕР±Р°РІСЏРјРµ listener РєСЉРј Р±СѓС‚РѕРЅР° Р·Р° СЃРѕСЂС‚РёСЂР°РЅРµ
 		buttonSort.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -127,8 +127,8 @@ public class PersonDataGUI {
 		
 		}
 
-		if (comparator == null) { // Ако стойността е null - сортирай по подразбиране
-			Arrays.sort(people); // Сортировка по подразбиране по години
+		if (comparator == null) { // РђРєРѕ СЃС‚РѕР№РЅРѕСЃС‚С‚Р° Рµ null - СЃРѕСЂС‚РёСЂР°Р№ РїРѕ РїРѕРґСЂР°Р·Р±РёСЂР°РЅРµ
+			Arrays.sort(people); // РЎРѕСЂС‚РёСЂРѕРІРєР° РїРѕ РїРѕРґСЂР°Р·Р±РёСЂР°РЅРµ РїРѕ РіРѕРґРёРЅРё
 		} else {
 			Arrays.sort(people, comparator);
 		}
@@ -137,13 +137,13 @@ public class PersonDataGUI {
 	}
 	
 	private static String getSortText() {
-		return "Моля, въведете цифрата на колоната, по която да се сортират данните: \n" +
+		return "РњРѕР»СЏ, РІСЉРІРµРґРµС‚Рµ С†РёС„СЂР°С‚Р° РЅР° РєРѕР»РѕРЅР°С‚Р°, РїРѕ РєРѕСЏС‚Рѕ РґР° СЃРµ СЃРѕСЂС‚РёСЂР°С‚ РґР°РЅРЅРёС‚Рµ: \n" +
 			
-				" 1 - Име(низходящ ред) \n" +
-				" 2 - ЕГН (възходящ ред)\n" +
-				" 3 - Височина(низходящ ред) \n" +
-				" 4 - Тегло (възходящ ред) \n" +
-				" 5 - Години(низходящ ред) \n";
+				" 1 - РРјРµ(РЅРёР·С…РѕРґСЏС‰ СЂРµРґ) \n" +
+				" 2 - Р•Р“Рќ (РІСЉР·С…РѕРґСЏС‰ СЂРµРґ)\n" +
+				" 3 - Р’РёСЃРѕС‡РёРЅР°(РЅРёР·С…РѕРґСЏС‰ СЂРµРґ) \n" +
+				" 4 - РўРµРіР»Рѕ (РІСЉР·С…РѕРґСЏС‰ СЂРµРґ) \n" +
+				" 5 - Р“РѕРґРёРЅРё(РЅРёР·С…РѕРґСЏС‰ СЂРµРґ) \n";
 				
 	}
 }
